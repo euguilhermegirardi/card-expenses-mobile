@@ -1,3 +1,20 @@
+export type CatalogueType = {
+  title: string
+  description: string
+  value: string
+  pay: string
+  type: string
+  id: number
+}
+
+export type HistoryType = {
+  title: string
+  description: string
+  value: string
+  type: string
+  id: number
+}
+
 export const data = [
   {
     catalogue: [
@@ -47,36 +64,42 @@ export const data = [
         title: 'Card to card',
         description: 'Maria',
         value: '+ $143.00',
+        type: 'card',
         id: 1,
       },
       {
         title: 'Apple Music',
         description: 'Online',
         value: '- $467.00',
+        type: 'music',
         id: 2,
       },
       {
         title: 'Uber',
         description: 'Service',
         value: '- $467.00',
+        type: 'uber',
         id: 3,
       },
       {
         title: 'Uber',
         description: 'Service',
         value: '- $43.00',
+        type: 'uber',
         id: 4,
       },
       {
         title: 'Card to card',
         description: 'Service',
         value: '- $2467.00',
+        type: 'card',
         id: 5,
       },
       {
         title: 'Card to card',
         description: 'Maria',
         value: '+ $1443.00',
+        type: 'card',
         id: 6,
       },
     ],
