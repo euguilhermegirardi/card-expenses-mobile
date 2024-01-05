@@ -1,15 +1,10 @@
-import { Battery, SignalHigh, Wifi } from 'lucide-react'
+import Avatar from '../../assets/avatar.png'
 
-export default function Header() {
+export default function Header({ title = 'Bank Cards' }: { title: string }) {
   return (
-    <header className="flex justify-between">
-      <small className="text-sm font-bold text-white">9:41</small>
-
-      <div className="flex items-center justify-center gap-1">
-        <SignalHigh color="white" size={20} />
-        <Wifi color="white" size={20} />
-        <Battery color="white" fill="white" size={20} className="ml-1" />
-      </div>
-    </header>
+    <div className="mt-12 flex w-full items-center justify-between text-white">
+      <h2 className="max-w-[167px] text-3xl font-bold">{title}</h2>
+      <img className="h-8 w-8 rounded-full " src={Avatar} alt="avatar.png" />
+    </div>
   )
 }
