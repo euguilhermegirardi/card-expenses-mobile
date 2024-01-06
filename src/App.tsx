@@ -23,7 +23,7 @@ function App() {
   }
 
   return (
-    <div className="mx-auto flex min-h-screen w-full max-w-[425px] flex-col items-center bg-gradient-to-r from-blue-900 to-gray-700 px-6 py-2">
+    <div className="mx-auto flex min-h-screen w-full max-w-[425px] flex-col items-center overflow-hidden bg-gradient-to-r from-blue-900 to-gray-700 px-6 py-2">
       <div className="flex w-full items-center justify-between">
         <small className="text-sm font-bold text-white">9:41</small>
 
