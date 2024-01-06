@@ -1,10 +1,10 @@
-import { data, HistoryType } from '../../utils/data/data'
+import { HistoryType } from '../../utils/data/data'
 import { gradientClasses, iconMappings } from '../../utils/icons/icons'
 
-export function HistoryList() {
+export function HistoryList({ data }: { data: HistoryType[] }) {
   return (
     <>
-      {data[0].history.map((each: HistoryType) => (
+      {data.map((each: HistoryType) => (
         <div
           key={each.id}
           className="mt-5 flex items-center justify-between border-b border-[#00000057] pb-2"
