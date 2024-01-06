@@ -2,6 +2,7 @@ import { Phone, Wifi, CarFront, Home, Zap } from 'lucide-react'
 import Header from '../Header'
 import { CatalogueType, data } from '../../utils/data/data'
 import React from 'react'
+import Footer from '../Footer'
 
 type IconMappings = {
   [key: string]: React.ReactElement
@@ -43,7 +44,7 @@ export default function Catalogue() {
       {data[0].catalogue.map((each: CatalogueType) => (
         <div
           key={each.id}
-          className="mt-5 flex w-full items-center justify-between border-b border-[#788ac8] pb-2  "
+          className="mt-5 flex w-[90%] items-center justify-between border-b border-[#00000057] pb-2"
         >
           <div className="rounded-full bg-gradient-to-tr from-blue-700 to-blue-300 p-[0.65rem]">
             {iconMappings[each.type]}
@@ -68,6 +69,8 @@ export default function Catalogue() {
           </div>
         </div>
       ))}
+
+      <Footer />
     </>
   )
 }
