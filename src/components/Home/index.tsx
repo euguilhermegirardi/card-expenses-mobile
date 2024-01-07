@@ -21,6 +21,20 @@ export default function Home() {
 
   const cardWidth = 210
   const cardHeight = 330
+  const baseClassName = 'flex w-full flex-col'
+
+  const additionalClassName =
+    showFirstCard || showSecondCard
+      ? 'mt-[270px] items-center justify-between'
+      : ''
+
+  const expandedAdditionalClass = secondExpandSalaryCard
+    ? 'mt-[2.5rem] items-center justify-between'
+    : ''
+
+  const combinedClassName = `${baseClassName} ${
+    secondExpandSalaryCard ? expandedAdditionalClass : additionalClassName
+  }`
 
   const calcLeftPosition = () =>
     firstCardCentered
@@ -54,7 +68,7 @@ export default function Home() {
     opacity: showFirstCard ? '0' : '1',
   })
 
-  const handleFirstCardClick = () => {
+  function handleFirstCardClick() {
     if (!firstCardCentered && !horizontalFirstCard) {
       setFirstCardCenteredCentered((prevCentered) => !prevCentered)
       setSecondCardCenteredCentered((prevCentered) => !prevCentered)
@@ -64,7 +78,7 @@ export default function Home() {
     }
   }
 
-  const handleSecondCardClick = () => {
+  function handleSecondCardClick() {
     if (!secondCardCentered && !horizontalSecondCard) {
       setSecondCardCenteredCentered((prevCentered) => !prevCentered)
       setFirstCardCenteredCentered((prevCentered) => !prevCentered)
@@ -90,19 +104,6 @@ export default function Home() {
       setSecondExpandSalaryCard(true)
     }
   }
-
-  const baseClassName = 'flex w-full flex-col'
-
-  const additionalClassName =
-    showFirstCard || showSecondCard
-      ? 'mt-[270px] items-center justify-between'
-      : ''
-
-  const test = secondExpandSalaryCard
-    ? 'mt-[2.5rem] items-center justify-between'
-    : ''
-
-  const combinedClassName = `${baseClassName} ${additionalClassName} ${test}`
 
   return (
     <>
