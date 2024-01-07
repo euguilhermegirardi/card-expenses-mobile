@@ -1,130 +1,154 @@
-import Header from '../Header'
 import { useState } from 'react'
+import { Forward, History } from 'lucide-react'
 import { useSpring, animated } from 'react-spring'
 import '../../../node_modules/swiper/swiper-bundle.css'
+import Header from '../Header'
+import Footer from '../Footer'
 import Black from '../../assets/black.png'
 import Blue from '../../assets/blue.png'
-import Footer from '../Footer'
-import { Forward, History } from 'lucide-react'
 import { HistoryList } from '../HistoryList'
 import { data } from '../../utils/data/data'
+import { InitialStateT } from './interfaces/initialState'
+
+const initialState: InitialStateT = {
+  firstCardCentered: true,
+  showFirstCard: false,
+  horizontalFirstCard: false,
+  secondCardCentered: false,
+  showSecondCard: false,
+  horizontalSecondCard: false,
+  firstExpandSalaryCard: false,
+  secondExpandSalaryCard: false,
+}
 
 export default function Home() {
-  const [firstCardCentered, setFirstCardCenteredCentered] = useState(true)
-  const [showFirstCard, setShowFirstCard] = useState(false)
-  const [horizontalFirstCard, setHorizontalFirstCard] = useState(false)
-  const [secondCardCentered, setSecondCardCenteredCentered] = useState(false)
-  const [showSecondCard, setShowSecondCard] = useState(false)
-  const [horizontalSecondCard, setHorizontalSecondCard] = useState(false)
-  const [firstExpandSalaryCard, setFirstExpandSalaryCard] = useState(false)
-  const [secondExpandSalaryCard, setSecondExpandSalaryCard] = useState(false)
+  const [cards, setCards] = useState(initialState)
 
   const cardWidth = 210
   const cardHeight = 330
   const baseClassName = 'flex w-full flex-col'
 
   const additionalClassName =
-    showFirstCard || showSecondCard
+    cards.showFirstCard || cards.showSecondCard
       ? 'mt-[270px] items-center justify-between'
       : ''
 
-  const expandedAdditionalClass = secondExpandSalaryCard
+  const expandedAdditionalClass = cards.secondExpandSalaryCard
     ? 'mt-[2.5rem] items-center justify-between'
     : ''
 
   const combinedClassName = `${baseClassName} ${
-    secondExpandSalaryCard ? expandedAdditionalClass : additionalClassName
+    cards.secondExpandSalaryCard ? expandedAdditionalClass : additionalClassName
   }`
 
   const calcLeftPosition = () =>
-    firstCardCentered
+    cards.firstCardCentered
       ? `calc(50% - ${cardWidth / 2}px)`
       : `calc(100% - ${cardWidth}px)`
 
   const firstCardProps = useSpring({
     left: calcLeftPosition(),
-    width: firstCardCentered ? cardWidth : cardWidth * 0.45,
+    width: cards.firstCardCentered ? cardWidth : cardWidth * 0.45,
     height: cardHeight,
-    zIndex: firstCardCentered ? 2 : 0,
-    transform: showFirstCard
+    zIndex: cards.firstCardCentered ? 2 : 0,
+    transform: cards.showFirstCard
       ? 'translateX(0%) rotate(90deg'
       : 'translateX(0%) rotate(0deg)',
-    opacity: showSecondCard ? '0' : '1',
+    opacity: cards.showSecondCard ? '0' : '1',
   })
 
   const calcRightPosition = () =>
-    secondCardCentered
+    cards.secondCardCentered
       ? `calc(50% - ${cardWidth / 2}px)`
       : `calc(100% - ${cardWidth}px)`
 
   const secondCardProps = useSpring({
     right: calcRightPosition(),
-    width: secondCardCentered ? cardWidth : cardWidth * 0.45,
+    width: cards.secondCardCentered ? cardWidth : cardWidth * 0.45,
     height: cardHeight,
-    zIndex: secondCardCentered ? 2 : 0,
-    transform: showSecondCard
+    zIndex: cards.secondCardCentered ? 2 : 0,
+    transform: cards.showSecondCard
       ? 'translateX(0%) rotate(90deg)'
       : 'translateX(0%) rotate(0deg)',
-    opacity: showFirstCard ? '0' : '1',
+    opacity: cards.showFirstCard ? '0' : '1',
   })
 
   function handleFirstCardClick() {
-    if (!firstCardCentered && !horizontalFirstCard) {
-      setFirstCardCenteredCentered((prevCentered) => !prevCentered)
-      setSecondCardCenteredCentered((prevCentered) => !prevCentered)
-    } else if (firstCardCentered) {
-      setShowFirstCard(true)
-      setHorizontalFirstCard(true)
+    if (!cards.firstCardCentered && !cards.horizontalFirstCard) {
+      setCards((prevCards) => ({
+        ...prevCards,
+        firstCardCentered: !cards.firstCardCentered,
+        secondCardCentered: !cards.secondCardCentered,
+      }))
+    } else if (cards.firstCardCentered) {
+      setCards((prevCards) => ({
+        ...prevCards,
+        showFirstCard: true,
+        horizontalFirstCard: true,
+      }))
     }
   }
 
   function handleSecondCardClick() {
-    if (!secondCardCentered && !horizontalSecondCard) {
-      setSecondCardCenteredCentered((prevCentered) => !prevCentered)
-      setFirstCardCenteredCentered((prevCentered) => !prevCentered)
-    } else if (secondCardCentered) {
-      setShowSecondCard(true)
-      setHorizontalSecondCard(true)
+    if (!cards.secondCardCentered && !cards.horizontalSecondCard) {
+      setCards((prevCards) => ({
+        ...prevCards,
+        secondCardCentered: !cards.secondCardCentered,
+        firstCardCentered: !cards.firstCardCentered,
+      }))
+    } else if (cards.secondCardCentered) {
+      setCards((prevCards) => ({
+        ...prevCards,
+        showSecondCard: true,
+        horizontalSecondCard: true,
+      }))
     }
   }
 
   function handleGoBack() {
-    setShowFirstCard(false)
-    setShowSecondCard(false)
-    setHorizontalFirstCard(false)
-    setHorizontalSecondCard(false)
-    setFirstExpandSalaryCard(false)
-    setSecondExpandSalaryCard(false)
+    setCards(initialState)
   }
 
   function handleExpandSalaryHistory() {
-    if (!firstExpandSalaryCard) {
-      setFirstExpandSalaryCard(true)
-    } else if (firstExpandSalaryCard) {
-      setSecondExpandSalaryCard(true)
+    if (!cards.firstExpandSalaryCard) {
+      setCards((prevCards) => ({
+        ...prevCards,
+        firstExpandSalaryCard: true,
+      }))
+    } else if (cards.firstExpandSalaryCard) {
+      setCards((prevCards) => ({
+        ...prevCards,
+        secondExpandSalaryCard: true,
+      }))
     }
   }
 
   return (
     <>
       <Header
-        title={showFirstCard || showSecondCard ? 'Salary Card' : 'Bank Cards'}
-        arrow={showFirstCard || showSecondCard}
-        firstExpandSalaryCard={firstExpandSalaryCard}
+        title={
+          cards.showFirstCard || cards.showSecondCard
+            ? 'Salary Card'
+            : 'Bank Cards'
+        }
+        arrow={cards.showFirstCard || cards.showSecondCard}
+        firstExpandSalaryCard={cards.firstExpandSalaryCard}
         handleGoBack={handleGoBack}
       />
 
-      {showFirstCard || showSecondCard ? null : (
+      {cards.showFirstCard || cards.showSecondCard ? null : (
         <div className="flex w-full flex-col items-start px-6">
           <p className="font-bold text-[#788ac8]">Balance</p>
           <small className="text-2xl font-bold text-white">$2,748.00</small>
         </div>
       )}
 
-      {!secondExpandSalaryCard ? (
+      {!cards.secondExpandSalaryCard ? (
         <div
           className={
-            showFirstCard || showSecondCard ? 'relative' : 'relative mt-5'
+            cards.showFirstCard || cards.showSecondCard
+              ? 'relative'
+              : 'relative mt-5'
           }
         >
           <animated.div
@@ -133,7 +157,9 @@ export default function Home() {
             onClick={handleFirstCardClick}
           >
             <img
-              className={showFirstCard || showSecondCard ? 'ml-[-2rem]' : ''}
+              className={
+                cards.showFirstCard || cards.showSecondCard ? 'ml-[-2rem]' : ''
+              }
               src={Black}
               alt="credit-card-black.png"
             />
@@ -145,7 +171,9 @@ export default function Home() {
             onClick={handleSecondCardClick}
           >
             <img
-              className={showFirstCard || showSecondCard ? 'ml-[-2rem]' : ''}
+              className={
+                cards.showFirstCard || cards.showSecondCard ? 'ml-[-2rem]' : ''
+              }
               src={Blue}
               alt="credit-card-black.png"
             />
@@ -153,9 +181,9 @@ export default function Home() {
         </div>
       ) : null}
 
-      {showFirstCard || showSecondCard ? (
+      {cards.showFirstCard || cards.showSecondCard ? (
         <div className={combinedClassName}>
-          {!secondExpandSalaryCard ? (
+          {!cards.secondExpandSalaryCard ? (
             <div className="mb-2 flex w-full items-start justify-between px-6">
               <div className="flex flex-col">
                 <p className="font-bold text-[#788ac8]">Balance</p>
@@ -192,7 +220,7 @@ export default function Home() {
         </div>
       ) : null}
 
-      {showFirstCard || showSecondCard ? null : (
+      {cards.showFirstCard || cards.showSecondCard ? null : (
         <div className="absolute bottom-[100px] flex w-28 justify-between">
           <div
             className="h-1 w-10 cursor-pointer rounded-md bg-white"
@@ -205,7 +233,7 @@ export default function Home() {
         </div>
       )}
 
-      <Footer isFooterVisible={showFirstCard || showSecondCard} />
+      <Footer isFooterVisible={cards.showFirstCard || cards.showSecondCard} />
     </>
   )
 }
