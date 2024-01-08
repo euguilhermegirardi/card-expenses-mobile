@@ -26,11 +26,11 @@ export default function Home() {
 
   const cardWidth = 210
   const cardHeight = 330
-  const baseClassName = 'flex w-full flex-col'
+  const baseClassName = 'flex w-full flex-col absolute max-w-[450px] bottom-0'
 
   const additionalClassName =
     cards.showFirstCard || cards.showSecondCard
-      ? 'mt-[270px] items-center justify-between'
+      ? 'items-center justify-between'
       : ''
 
   const expandedAdditionalClass = cards.secondExpandSalaryCard
@@ -215,7 +215,12 @@ export default function Home() {
               <div className="h-[2px] w-10 rounded-md bg-gray-400" />
             </div>
 
-            <HistoryList data={data[0].salaryHistory} />
+            <HistoryList
+              data={data[0].salaryHistory}
+              isShowCard={cards.showFirstCard || cards.showSecondCard}
+              isFirstExpandedSalary={cards.firstExpandSalaryCard}
+              isFullExpanded={cards.secondExpandSalaryCard}
+            />
           </div>
         </div>
       ) : null}

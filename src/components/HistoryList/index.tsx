@@ -1,9 +1,36 @@
 import { HistoryType } from '../../utils/data/data'
 import { gradientClasses, iconMappings } from '../../utils/icons/icons'
 
-export function HistoryList({ data }: { data: HistoryType[] }) {
+export function HistoryList({
+  isShowCard,
+  isFirstExpandedSalary,
+  isFullExpanded,
+  data,
+}: {
+  isShowCard?: boolean
+  isFirstExpandedSalary?: boolean
+  isFullExpanded?: boolean
+  data: HistoryType[]
+}) {
+  const baseClassName = 'flex flex-col'
+
+  const additionalClassName = isShowCard ? 'h-[163px] overflow-y-auto' : ''
+
+  const firstExpandedAdditionalClass = isFirstExpandedSalary
+    ? 'h-[245px] overflow-y-auto'
+    : ''
+
+  const secondExpandedAdditionalClass = isFullExpanded
+    ? 'h-[535px] overflow-y-auto'
+    : ''
+
+  const combinedClassName = `${baseClassName} ${
+    isFirstExpandedSalary ? firstExpandedAdditionalClass : additionalClassName
+  }
+  ${isFullExpanded ? secondExpandedAdditionalClass : additionalClassName}`
+
   return (
-    <>
+    <div className={combinedClassName}>
       {data.map((each: HistoryType) => (
         <div
           key={each.id}
@@ -33,6 +60,6 @@ export function HistoryList({ data }: { data: HistoryType[] }) {
           </div>
         </div>
       ))}
-    </>
+    </div>
   )
 }
