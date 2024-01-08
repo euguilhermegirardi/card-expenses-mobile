@@ -20,7 +20,7 @@ export default function Footer({
   return (
     <>
       {isFooterVisible ? null : (
-        <footer className="absolute bottom-0 flex h-20 w-full max-w-[425px] items-center justify-evenly rounded-tl-[2.8rem] rounded-tr-[2.8rem] bg-[#2a3766] py-4">
+        <footer className="absolute bottom-0 flex h-20 w-full max-w-[450px] items-center justify-evenly rounded-tl-[2.8rem] rounded-tr-[2.8rem] bg-[#2a3766] py-4">
           <div
             className={` flex h-12 w-12 items-center justify-center ${
               isHomeActive

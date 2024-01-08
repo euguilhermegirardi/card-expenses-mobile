@@ -3,7 +3,7 @@ import AppRoutes from './routes/AppRoutes'
 
 function App() {
   return (
-    <div className="mx-auto flex min-h-screen w-full max-w-[425px] flex-col items-center overflow-hidden bg-gradient-to-r from-blue-900 to-gray-700 py-2">
+    <div className="mx-auto flex min-h-screen w-full max-w-[450px] flex-col items-center overflow-hidden bg-gradient-to-r from-blue-900 to-gray-700 py-2">
       <div className="flex w-full items-center justify-between px-6">
         <small className="text-sm font-bold text-white">9:41</small>
 
