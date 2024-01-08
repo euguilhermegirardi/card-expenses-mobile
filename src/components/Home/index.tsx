@@ -207,7 +207,7 @@ export default function Home() {
             </div>
           ) : null}
 
-          <div className="w-full rounded-tl-[2.8rem] rounded-tr-[2.8rem] bg-[#2a3766] px-8 py-4">
+          <div className="w-full rounded-tl-[2.8rem] rounded-tr-[2.8rem] bg-[#2a3766] px-8 pt-4">
             <div
               className="flex h-3 w-full cursor-pointer items-center justify-center"
               onClick={handleExpandSalaryHistory}
