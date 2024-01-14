@@ -1,7 +1,4 @@
-# Ocean Friends FE Test
-
-This is a FE test for the company Ocean Friends.
-
+# Card Expenses - Mobile
 
 ## Getting started
 
